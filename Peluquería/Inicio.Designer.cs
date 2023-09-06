@@ -37,7 +37,7 @@ namespace Peluquería
             this.PanelSesión = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.ImagenLogo = new System.Windows.Forms.PictureBox();
-            this.lvlInvitado = new System.Windows.Forms.LinkLabel();
+            this.LinkInvitado = new System.Windows.Forms.LinkLabel();
             btnMinimizar = new System.Windows.Forms.Button();
             this.PanelSesión.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImagenLogo)).BeginInit();
@@ -112,10 +112,10 @@ namespace Peluquería
             this.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCerrar.FlatAppearance.BorderSize = 0;
-            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
+            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Image = global::Peluquería.Properties.Resources.icons8_cerrar_ventana_48;
-            this.btnCerrar.Location = new System.Drawing.Point(512, 0);
+            this.btnCerrar.Location = new System.Drawing.Point(511, 0);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(40, 30);
             this.btnCerrar.TabIndex = 14;
@@ -132,18 +132,18 @@ namespace Peluquería
             this.ImagenLogo.TabIndex = 15;
             this.ImagenLogo.TabStop = false;
             // 
-            // lvlInvitado
+            // LinkInvitado
             // 
-            this.lvlInvitado.ActiveLinkColor = System.Drawing.Color.Cyan;
-            this.lvlInvitado.AutoSize = true;
-            this.lvlInvitado.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.lvlInvitado.Location = new System.Drawing.Point(211, 256);
-            this.lvlInvitado.Name = "lvlInvitado";
-            this.lvlInvitado.Size = new System.Drawing.Size(105, 13);
-            this.lvlInvitado.TabIndex = 16;
-            this.lvlInvitado.TabStop = true;
-            this.lvlInvitado.Text = "Entrar como Invitado";
-            this.lvlInvitado.Click += new System.EventHandler(this.lvlInvitado_Click);
+            this.LinkInvitado.ActiveLinkColor = System.Drawing.Color.Cyan;
+            this.LinkInvitado.AutoSize = true;
+            this.LinkInvitado.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.LinkInvitado.Location = new System.Drawing.Point(211, 256);
+            this.LinkInvitado.Name = "LinkInvitado";
+            this.LinkInvitado.Size = new System.Drawing.Size(105, 13);
+            this.LinkInvitado.TabIndex = 16;
+            this.LinkInvitado.TabStop = true;
+            this.LinkInvitado.Text = "Entrar como Invitado";
+            this.LinkInvitado.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkInvitado_LinkClicked);
             // 
             // Inicio
             // 
@@ -153,11 +153,12 @@ namespace Peluquería
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(551, 298);
-            this.Controls.Add(this.lvlInvitado);
+            this.Controls.Add(this.LinkInvitado);
             this.Controls.Add(this.ImagenLogo);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(btnMinimizar);
             this.Controls.Add(this.PanelSesión);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -186,7 +187,7 @@ namespace Peluquería
         private System.Windows.Forms.Panel PanelSesión;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.PictureBox ImagenLogo;
-        private System.Windows.Forms.LinkLabel lvlInvitado;
+        private System.Windows.Forms.LinkLabel LinkInvitado;
     }
 }
 

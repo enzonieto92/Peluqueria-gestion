@@ -31,6 +31,7 @@ namespace Peluquería
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Button btnMinimizar;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuGestión));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -46,7 +47,6 @@ namespace Peluquería
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuGestión));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.LblTime = new System.Windows.Forms.Label();
             this.TimerTransicion = new System.Windows.Forms.Timer(this.components);
@@ -80,6 +80,7 @@ namespace Peluquería
             this.btnAgregarServicio = new System.Windows.Forms.Button();
             this.btnEliminarServicio = new System.Windows.Forms.Button();
             this.btnEditarServicio = new System.Windows.Forms.Button();
+            this.pnlDrag = new System.Windows.Forms.Panel();
             btnMinimizar = new System.Windows.Forms.Button();
             this.panelBotones.SuspendLayout();
             this.panelTurnos.SuspendLayout();
@@ -97,7 +98,7 @@ namespace Peluquería
             btnMinimizar.FlatAppearance.BorderSize = 0;
             btnMinimizar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             btnMinimizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnMinimizar.Image = global::Peluquería.Properties.Resources.icons8_menos_30;
+            btnMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimizar.Image")));
             btnMinimizar.Location = new System.Drawing.Point(1082, 0);
             btnMinimizar.Name = "btnMinimizar";
             btnMinimizar.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -230,7 +231,7 @@ namespace Peluquería
             this.btnVerTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVerTodo.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVerTodo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnVerTodo.Location = new System.Drawing.Point(492, 267);
+            this.btnVerTodo.Location = new System.Drawing.Point(490, 267);
             this.btnVerTodo.Margin = new System.Windows.Forms.Padding(0);
             this.btnVerTodo.Name = "btnVerTodo";
             this.btnVerTodo.Size = new System.Drawing.Size(182, 47);
@@ -247,14 +248,11 @@ namespace Peluquería
             this.grdTurnos.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
             this.grdTurnos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.grdTurnos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdTurnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grdTurnos.BackgroundColor = System.Drawing.Color.Teal;
             this.grdTurnos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdTurnos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdTurnos.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.grdTurnos.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.grdTurnos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Teal;
@@ -263,7 +261,7 @@ namespace Peluquería
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdTurnos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grdTurnos.ColumnHeadersHeight = 25;
             this.grdTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -278,10 +276,9 @@ namespace Peluquería
             this.grdTurnos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.grdTurnos.EnableHeadersVisualStyles = false;
             this.grdTurnos.GridColor = System.Drawing.Color.Teal;
-            this.grdTurnos.Location = new System.Drawing.Point(0, 49);
+            this.grdTurnos.Location = new System.Drawing.Point(3, 49);
             this.grdTurnos.MultiSelect = false;
             this.grdTurnos.Name = "grdTurnos";
-            this.grdTurnos.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -294,11 +291,15 @@ namespace Peluquería
             this.grdTurnos.RowHeadersWidth = 40;
             this.grdTurnos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
             this.grdTurnos.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.grdTurnos.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdTurnos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.grdTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdTurnos.Size = new System.Drawing.Size(454, 265);
             this.grdTurnos.TabIndex = 60;
+            this.grdTurnos.VirtualMode = true;
             // 
             // lblTurnos
             // 
@@ -336,12 +337,12 @@ namespace Peluquería
             this.btnAgregarTurno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarTurno.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarTurno.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAgregarTurno.Location = new System.Drawing.Point(492, 53);
+            this.btnAgregarTurno.Location = new System.Drawing.Point(491, 49);
             this.btnAgregarTurno.Margin = new System.Windows.Forms.Padding(0);
             this.btnAgregarTurno.Name = "btnAgregarTurno";
             this.btnAgregarTurno.Size = new System.Drawing.Size(182, 47);
             this.btnAgregarTurno.TabIndex = 61;
-            this.btnAgregarTurno.Text = "AGREGAR";
+            this.btnAgregarTurno.Text = "AGREGAR TURNO";
             this.btnAgregarTurno.UseVisualStyleBackColor = false;
             this.btnAgregarTurno.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
@@ -352,7 +353,7 @@ namespace Peluquería
             this.btnEliminarTurno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminarTurno.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarTurno.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnEliminarTurno.Location = new System.Drawing.Point(492, 193);
+            this.btnEliminarTurno.Location = new System.Drawing.Point(491, 193);
             this.btnEliminarTurno.Margin = new System.Windows.Forms.Padding(0);
             this.btnEliminarTurno.Name = "btnEliminarTurno";
             this.btnEliminarTurno.Size = new System.Drawing.Size(182, 47);
@@ -369,7 +370,7 @@ namespace Peluquería
             this.btnEditarTurno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditarTurno.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditarTurno.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnEditarTurno.Location = new System.Drawing.Point(492, 123);
+            this.btnEditarTurno.Location = new System.Drawing.Point(491, 120);
             this.btnEditarTurno.Margin = new System.Windows.Forms.Padding(0);
             this.btnEditarTurno.Name = "btnEditarTurno";
             this.btnEditarTurno.Size = new System.Drawing.Size(182, 47);
@@ -392,7 +393,7 @@ namespace Peluquería
             this.button3.BackColor = System.Drawing.Color.LightSeaGreen;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = global::Peluquería.Properties.Resources.busqueda;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.Location = new System.Drawing.Point(801, 129);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(47, 27);
@@ -403,9 +404,9 @@ namespace Peluquería
             // 
             this.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCerrar.FlatAppearance.BorderSize = 0;
-            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
+            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrar.Image = global::Peluquería.Properties.Resources.icons8_cerrar_ventana_48;
+            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
             this.btnCerrar.Location = new System.Drawing.Point(1129, 0);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(40, 30);
@@ -468,7 +469,6 @@ namespace Peluquería
             this.gvClientes.Location = new System.Drawing.Point(2, 49);
             this.gvClientes.MultiSelect = false;
             this.gvClientes.Name = "gvClientes";
-            this.gvClientes.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -481,6 +481,8 @@ namespace Peluquería
             this.gvClientes.RowHeadersWidth = 40;
             this.gvClientes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
             this.gvClientes.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.gvClientes.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -530,6 +532,7 @@ namespace Peluquería
             this.btnAgregarCliente.TabIndex = 61;
             this.btnAgregarCliente.Text = "AGREGAR";
             this.btnAgregarCliente.UseVisualStyleBackColor = false;
+            this.btnAgregarCliente.Click += new System.EventHandler(this.btnAgregarCliente_Click);
             // 
             // btnEliminarCliente
             // 
@@ -545,6 +548,7 @@ namespace Peluquería
             this.btnEliminarCliente.TabIndex = 63;
             this.btnEliminarCliente.Text = "ELIMINAR";
             this.btnEliminarCliente.UseVisualStyleBackColor = false;
+            this.btnEliminarCliente.Click += new System.EventHandler(this.btnEliminarCliente_Click);
             // 
             // btnEditarCliente
             // 
@@ -561,6 +565,7 @@ namespace Peluquería
             this.btnEditarCliente.TabIndex = 62;
             this.btnEditarCliente.Text = "EDITAR";
             this.btnEditarCliente.UseVisualStyleBackColor = false;
+            this.btnEditarCliente.Click += new System.EventHandler(this.btnEditarCliente_Click);
             // 
             // panelServicios
             // 
@@ -617,7 +622,6 @@ namespace Peluquería
             this.gvServicios.Location = new System.Drawing.Point(32, 49);
             this.gvServicios.MultiSelect = false;
             this.gvServicios.Name = "gvServicios";
-            this.gvServicios.ReadOnly = true;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle14.BackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -630,6 +634,8 @@ namespace Peluquería
             this.gvServicios.RowHeadersWidth = 40;
             this.gvServicios.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.White;
             this.gvServicios.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.gvServicios.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gvServicios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -711,10 +717,18 @@ namespace Peluquería
             this.btnEditarServicio.Text = "EDITAR";
             this.btnEditarServicio.UseVisualStyleBackColor = false;
             // 
+            // pnlDrag
+            // 
+            this.pnlDrag.Location = new System.Drawing.Point(0, 1);
+            this.pnlDrag.Name = "pnlDrag";
+            this.pnlDrag.Size = new System.Drawing.Size(1076, 29);
+            this.pnlDrag.TabIndex = 55;
+            // 
             // MenuGestión
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1169, 697);
             this.Controls.Add(this.panelTurnos);
@@ -727,6 +741,8 @@ namespace Peluquería
             this.Controls.Add(btnMinimizar);
             this.Controls.Add(this.panelBotones);
             this.Controls.Add(this.LblTime);
+            this.Controls.Add(this.pnlDrag);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -774,7 +790,6 @@ namespace Peluquería
         private System.Windows.Forms.Label lblClientes;
         private System.Windows.Forms.Label lblOpcionesClientes;
         private System.Windows.Forms.Button btnAgregarCliente;
-        private System.Windows.Forms.Button btnEliminarCliente;
         private System.Windows.Forms.Button btnEditarCliente;
         private System.Windows.Forms.DataGridView gvServicios;
         private System.Windows.Forms.Label lblServicios;
@@ -783,5 +798,7 @@ namespace Peluquería
         private System.Windows.Forms.Button btnEliminarServicio;
         private System.Windows.Forms.Button btnEditarServicio;
         private System.Windows.Forms.Button btnVerTodo;
+        private System.Windows.Forms.Panel pnlDrag;
+        private System.Windows.Forms.Button btnEliminarCliente;
     }
 }

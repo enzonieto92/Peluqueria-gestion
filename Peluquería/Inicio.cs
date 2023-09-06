@@ -73,14 +73,6 @@ namespace Peluquería
         {
         }
 
-        private void lvlInvitado_Click(object sender, EventArgs e)
-        {
-
-            animacion(false);
-            MenuGestión Menu = new MenuGestión("INVITADO");
-            Menu.ShowDialog();
-            animacion(true);
-        }
         public void animacion(bool aparece)
         {
             if (aparece)
@@ -98,6 +90,14 @@ namespace Peluquería
                 transition.add(this, "Opacity", 0.0);
                 transition.run();
             }
+        }
+
+        private void LinkInvitado_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+                animacion(false);
+                MenuGestión Menu = new MenuGestión("INVITADO");
+                Menu.ShowDialog();
+                animacion(true);
         }
     }
 }

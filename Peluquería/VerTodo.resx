@@ -120,45 +120,10 @@
   <metadata name="btnMinimizar.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <metadata name="Detalles.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnMinimizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAH1JREFUSEvtzUEKgDAMRNEeT+9/nhLNwkDN37RkEKQP/ipjbdu2/YuZyUM0rA7R
-        sDpEw+oQDatLaKQooZGihEaKEhopQjSsDtGwOgSjs/dus/l377eeBjTwbqs/Pug9b0ADVQMaKAt0VBbo
-        qCzQUVmgo7JAR2VT6IHVPtTaBb33a3Ep7SPaAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="TimerTransicion.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>104, 17</value>
-  </metadata>
-  <data name="button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAANJJREFUOE/V
-        kzsOwjAQBVNyFDgFl6ICCe5CxyVAUFPTcwha4E2kJxnH33Q8aYrY8Wid7A6JLMRBvMQn4Cx2oit7EUpO
-        Avk9WHuKtajmIjhwE7kDyC0uSl0Z0loQvUVWyjdj8zo+tQVRtgBfo3iFRI6Cc6vxKYj/Zm9cJQX9hEX+
-        5pxkhZPFxmSF9NmcJIVMABu9catNhFuR3KjEg5AM48Rma+tsRLEItwATUJNalq3OsRRo2lhMNb6mqY4q
-        kvhQjK/p96pSshQcjInTJW3NX0mHxxe7sFwBOv+2nAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnCerrar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAV9JREFUaEPtlm1uwkAMREPvAAcpPWv7A9GbRqknJGjZDMGL7ZUq+UlPijbRjA3i
-        Y0iSJEn+LdM0PdUVVtBDF1hwT82w0J6aYaE9dYEF99KFsOCCsA4WDL0J62DB0JuwDhYMvQnrYMGQcBK/
-        bpe74Bk8+wDrgC4ogk/jOE5Qri/ix3z6CM4uxXPH+XSBdUAXFMHndbBluKtYLoHra/XM53xngXVAF5TB
-        91d3GXBdgg2Pd2mDsqcdZTAbFEuws/LducN6oJmG0IP4XQ5cKveeDg9YDzTTGEqXkLPd4QHrgWYaQ7HA
-        D1ngV9xdADR26WgIpcOvyr2XSzR06VGGYjDThxgou9pQhoZ8jUIzilDzDxlgPdCMItT8VwKwHmhGGYqB
-        Nq8q4SxuhgfKnnbCgivCesKCK8J6woIrwnpYcOm7sKxaF1hwL11gwb304sDCe+hJ9yVCYYXvyvKSJEmS
-        5DXD8AdS7XZqpMYmHQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>44</value>
-  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIADIKAEAFgAAAIlQTkcNChoKAAAADUlIRFIAAAEAAAABAAgGAAAAXHKoZgAAAAFv

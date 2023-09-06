@@ -7,26 +7,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Transitions; 
+using Transitions;
 
 namespace Peluquería
 {
     public partial class MenuGestión : Form
     {
+        private Point dragStartPoint;
+        private bool isDragging = false;
+        static Conexión conn = new Conexión();
+        DataTable turnosHoy = conn.TurnosHoy();
+        DataTable clientes = conn.ObtenerClientes();
+        DataTable servicios = conn.Servicios();
         public MenuGestión(string User)
         {
             InitializeComponent();
+            InitializeDragEvents(pnlDrag);
             lblUser.Text = User;
             Opacity = 0;
         }
 
-        Conexión conn = new Conexión();
+        private void MenuGestión_Load(object sender, EventArgs e)
+        {
+            grdTurnos.DataSource = turnosHoy;
+            grdTurnos.Columns["TurnoId"].Visible = false;
+            grdTurnos.Columns["Fecha"].Visible = false;
+            
+            gvClientes.DataSource = clientes;
+            gvClientes.Columns["ClienteId"].Visible = false;
+            gvClientes.Columns["Balance"].Visible = false;
+
+            gvServicios.DataSource = servicios;
+            gvServicios.Columns["ServicioId"].Visible = false;
+
+            posInicial();
+            animacion(true);
+        
+        }
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             LblTime.Text = DateTime.Now.ToString("HH:mm") + " hs";
         }
-
 
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -37,14 +60,6 @@ namespace Peluquería
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
-        }
-
-        private void MenuGestión_Load(object sender, EventArgs e)
-        {
-            grdTurnos.DataSource = conn.TurnosHoy();
-            gvServicios.DataSource = conn.Servicios();
-            posInicial();
-            animacion(true);
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
@@ -61,8 +76,8 @@ namespace Peluquería
         {
             NuevoTurno nuevoTurno = new NuevoTurno();
             nuevoTurno.ShowDialog();
-            grdTurnos.DataSource = conn.TurnosHoy();
-
+            turnosHoy = conn.TurnosHoy();
+            grdTurnos.DataSource = turnosHoy;
         }
 
         private void btnServicios_Click(object sender, EventArgs e)
@@ -80,9 +95,9 @@ namespace Peluquería
             if (menu == "Servicios")
             {
                 btnServicios.BackColor = Color.LightSeaGreen;
-                 posTurno = -6000;
-                 posCliente = -3000;
-                 posServicio = 300;
+                posTurno = -6000;
+                posCliente = -3000;
+                posServicio = 300;
             }
             else if (menu == "Clientes")
             {
@@ -106,7 +121,7 @@ namespace Peluquería
         }
         private void posInicial()
         {
-            panelClientes.Location = new Point( 3000, 211);
+            panelClientes.Location = new Point(3000, 211);
             panelTurnos.Location = new Point(300, 211);
             panelServicios.Location = new Point(6000, 211);
             btnTurnos.BackColor = Color.LightSeaGreen;
@@ -131,13 +146,151 @@ namespace Peluquería
 
         private void btnVerTodo_Click(object sender, EventArgs e)
         {
-
+            VerTodo Menu = new VerTodo();
+            Menu.ShowDialog();
+            turnosHoy = conn.TurnosHoy();
+            grdTurnos.DataSource = turnosHoy;
+            MenuGestión_Load(this, e);
         }
 
         private void btnEliminarTurno_Click(object sender, EventArgs e)
         {
+            if (grdTurnos.SelectedRows.Count > 0)
+            {
+                DataRowView selectedRowView = (DataRowView)grdTurnos.SelectedRows[0].DataBoundItem;
+                DataRow selectedRow = selectedRowView.Row;
+
+                string Turno = selectedRow["TurnoId"].ToString();
+                string Horario = selectedRow["Horario"].ToString();
+                string Servicio = selectedRow["Servicio"].ToString();
+                string Cliente = selectedRow["Cliente"].ToString();
+                string Fecha = selectedRow["Fecha"].ToString();
+                // Find the row in the DataTable that matches the selected information
+                DataRow[] matchingRows = turnosHoy.Select(
+                    $"TurnoId = '{Turno}' AND Horario = '{Horario}' AND Servicio = '{Servicio}'");
+
+                if (matchingRows.Length > 0)
+                {
+                    DataRow rowToDelete = matchingRows[0];
+
+                    string message = "Está seguro que desea eliminar el siguiente turno?: \n\n" +
+                                     "Cliente: " + Cliente + "\n\n" +
+                                     "Servicio: " + Servicio + "\n\n" +
+                                     "Fecha: " + Fecha + "\n\n" + 
+                                     "Horario: " + Horario + " \n\n";
+
+                    string title = "Advertencia";
+
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show(message, title, buttons);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        int turnoId = Convert.ToInt32(rowToDelete["TurnoId"]);
+                        conn.EliminarTurno(turnoId); // Llamar al método para eliminar el turno
+                        turnosHoy.Rows.Remove(rowToDelete); // Remove the row from the DataTable
+                        grdTurnos.DataSource = turnosHoy; // Reassign the DataTable as the DataSource
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
+
+        private void InitializeDragEvents(Control control)
+        {
+            control.MouseDown += (sender, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    dragStartPoint = new Point(e.X, e.Y);
+                    isDragging = true;
+                }
+            };
+
+            control.MouseMove += (sender, e) =>
+            {
+                if (isDragging)
+                {
+                    Point difference = new Point(e.X - dragStartPoint.X, e.Y - dragStartPoint.Y);
+                    this.Location = new Point(this.Location.X + difference.X, this.Location.Y + difference.Y);
+                }
+            };
+
+            control.MouseUp += (sender, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    isDragging = false;
+                }
+            };
+        }
+
+        private void btnAgregarCliente_Click(object sender, EventArgs e)
+        {
+            NuevoCliente agregar = new NuevoCliente();
+            agregar.ShowDialog();
 
         }
-    }
 
+        private void btnEliminarCliente_Click(object sender, EventArgs e)
+        {
+            DataRowView selectedRowView = (DataRowView)gvClientes.SelectedRows[0].DataBoundItem;
+            DataRow selectedRow = selectedRowView.Row;
+
+            string ClienteId = selectedRow["ClienteId"].ToString();
+            string Nombre = selectedRow["Nombre"].ToString();
+            string Apellido = selectedRow["Apellido"].ToString();
+            string Teléfono = selectedRow["Teléfono"].ToString();
+
+            DataRow[] matchingRows = clientes.Select(
+                   $"ClienteId = '{ClienteId}' AND Nombre = '{Nombre}' AND Apellido = '{Apellido}' AND Teléfono = '{Teléfono}'");
+
+
+            if (matchingRows.Length > 0)
+            {
+                DataRow rowToDelete = matchingRows[0];
+
+                string message = "Está seguro que desea eliminar el siguiente Cliente?: \n\n" +
+                                 "Cliente: " + Nombre + " " + Apellido + "\n\n" +
+                                 "Teléfono: " + Teléfono + "\n\n";
+
+                string title = "Advertencia";
+
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+
+                if (result == DialogResult.Yes)
+                {
+                    int clienteId = Convert.ToInt32(rowToDelete["ClienteId"]);
+                    conn.EliminarCliente(clienteId); 
+                    clientes.Rows.Remove(rowToDelete);
+                    clientes = conn.ObtenerClientes();
+                    gvClientes.DataSource = clientes;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+        }
+
+        private void btnEditarCliente_Click(object sender, EventArgs e)
+        {
+            if (gvClientes.SelectedRows.Count > 0)
+            {
+                // Obtén la fila seleccionada
+                DataGridViewRow filaSeleccionada = gvClientes.SelectedRows[0];
+
+                // Habilita el modo de edición para la fila
+                filaSeleccionada.Selected = true;
+                gvClientes.BeginEdit(false);
+            }
+        }
+
+    }
 }
