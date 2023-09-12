@@ -82,7 +82,7 @@ namespace Peluquería
             this.lblFecha.AutoSize = true;
             this.lblFecha.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFecha.ForeColor = System.Drawing.Color.White;
-            this.lblFecha.Location = new System.Drawing.Point(74, 232);
+            this.lblFecha.Location = new System.Drawing.Point(76, 266);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(61, 23);
             this.lblFecha.TabIndex = 8;
@@ -167,7 +167,7 @@ namespace Peluquería
             this.dtpFecha.CalendarTrailingForeColor = System.Drawing.Color.Teal;
             this.dtpFecha.CustomFormat = "";
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(138, 236);
+            this.dtpFecha.Location = new System.Drawing.Point(140, 270);
             this.dtpFecha.MaxDate = new System.DateTime(9998, 12, 17, 0, 0, 0, 0);
             this.dtpFecha.MinDate = new System.DateTime(2023, 8, 3, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
@@ -181,7 +181,7 @@ namespace Peluquería
             this.lblHS.AutoSize = true;
             this.lblHS.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHS.ForeColor = System.Drawing.Color.White;
-            this.lblHS.Location = new System.Drawing.Point(285, 233);
+            this.lblHS.Location = new System.Drawing.Point(287, 267);
             this.lblHS.Name = "lblHS";
             this.lblHS.Size = new System.Drawing.Size(31, 23);
             this.lblHS.TabIndex = 73;
@@ -211,7 +211,7 @@ namespace Peluquería
             "20",
             "21",
             "22"});
-            this.cbxHora.Location = new System.Drawing.Point(225, 235);
+            this.cbxHora.Location = new System.Drawing.Point(227, 269);
             this.cbxHora.MaxDropDownItems = 20;
             this.cbxHora.Name = "cbxHora";
             this.cbxHora.Size = new System.Drawing.Size(38, 21);
@@ -229,7 +229,7 @@ namespace Peluquería
             this.cbxMinuto.Items.AddRange(new object[] {
             "00",
             "30"});
-            this.cbxMinuto.Location = new System.Drawing.Point(264, 235);
+            this.cbxMinuto.Location = new System.Drawing.Point(266, 269);
             this.cbxMinuto.Name = "cbxMinuto";
             this.cbxMinuto.Size = new System.Drawing.Size(38, 21);
             this.cbxMinuto.TabIndex = 75;
@@ -239,7 +239,7 @@ namespace Peluquería
             this.lblSeparacion.AutoSize = true;
             this.lblSeparacion.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSeparacion.ForeColor = System.Drawing.Color.White;
-            this.lblSeparacion.Location = new System.Drawing.Point(246, 230);
+            this.lblSeparacion.Location = new System.Drawing.Point(248, 264);
             this.lblSeparacion.Name = "lblSeparacion";
             this.lblSeparacion.Size = new System.Drawing.Size(18, 26);
             this.lblSeparacion.TabIndex = 76;
@@ -264,7 +264,7 @@ namespace Peluquería
             // Borde3
             // 
             this.Borde3.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.Borde3.Location = new System.Drawing.Point(139, 211);
+            this.Borde3.Location = new System.Drawing.Point(138, 211);
             this.Borde3.Name = "Borde3";
             this.Borde3.Size = new System.Drawing.Size(163, 1);
             this.Borde3.TabIndex = 78;
@@ -279,7 +279,7 @@ namespace Peluquería
             this.cbxServicios.ForeColor = System.Drawing.SystemColors.Window;
             this.cbxServicios.FormattingEnabled = true;
             this.cbxServicios.IntegralHeight = false;
-            this.cbxServicios.Location = new System.Drawing.Point(139, 266);
+            this.cbxServicios.Location = new System.Drawing.Point(144, 227);
             this.cbxServicios.Name = "cbxServicios";
             this.cbxServicios.Size = new System.Drawing.Size(157, 21);
             this.cbxServicios.TabIndex = 80;
@@ -289,7 +289,7 @@ namespace Peluquería
             this.lblServicio.AutoSize = true;
             this.lblServicio.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblServicio.ForeColor = System.Drawing.Color.White;
-            this.lblServicio.Location = new System.Drawing.Point(54, 266);
+            this.lblServicio.Location = new System.Drawing.Point(59, 227);
             this.lblServicio.Name = "lblServicio";
             this.lblServicio.Size = new System.Drawing.Size(78, 23);
             this.lblServicio.TabIndex = 79;
@@ -344,7 +344,7 @@ namespace Peluquería
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(279, 264);
+            this.panel1.Location = new System.Drawing.Point(284, 225);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(36, 24);
             this.panel1.TabIndex = 83;

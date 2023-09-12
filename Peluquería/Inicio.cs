@@ -50,29 +50,6 @@ namespace Peluquería
             WindowState = FormWindowState.Minimized;
         }
 
-        private void lblUsuario_Click(object sender, EventArgs e)
-        {
-            txtboxUsuario.Focus();
-        }
-
-        private void lblContraseña_Click(object sender, EventArgs e)
-        {
-            txtboxContraseña.Focus();
-        }
-
-        private void txtboxContraseña_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Inicio_MouseMove(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void Inicio_MouseUp(object sender, MouseEventArgs e)
-        {
-        }
-
         public void animacion(bool aparece)
         {
             if (aparece)
@@ -98,6 +75,26 @@ namespace Peluquería
                 MenuGestión Menu = new MenuGestión("INVITADO");
                 Menu.ShowDialog();
                 animacion(true);
+        }
+
+        private void txtboxUsuario_Enter(object sender, EventArgs e)
+        {
+            Transition.run(Borde, "BackColor", Color.SpringGreen, new TransitionType_Linear(300));
+        }
+
+        private void txtboxContraseña_Enter(object sender, EventArgs e)
+        {
+            Transition.run(Borde2, "BackColor", Color.SpringGreen, new TransitionType_Linear(300));
+        }
+
+        private void txtboxUsuario_Leave(object sender, EventArgs e)
+        {
+            Transition.run(Borde, "BackColor", Color.PaleTurquoise, new TransitionType_Linear(300));
+        }
+
+        private void txtboxContraseña_Leave(object sender, EventArgs e)
+        {
+            Transition.run(Borde2, "BackColor", Color.PaleTurquoise, new TransitionType_Linear(300));
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Peluquería
             
             gvClientes.DataSource = clientes;
             gvClientes.Columns["ClienteId"].Visible = false;
-            gvClientes.Columns["Balance"].Visible = false;
 
             gvServicios.DataSource = servicios;
             gvServicios.Columns["ServicioId"].Visible = false;
@@ -276,21 +275,52 @@ namespace Peluquería
                     return;
                 }
             }
-
         }
 
-        private void btnEditarCliente_Click(object sender, EventArgs e)
-        {
-            if (gvClientes.SelectedRows.Count > 0)
-            {
-                // Obtén la fila seleccionada
-                DataGridViewRow filaSeleccionada = gvClientes.SelectedRows[0];
 
-                // Habilita el modo de edición para la fila
-                filaSeleccionada.Selected = true;
-                gvClientes.BeginEdit(false);
+        private void btnEditarTurno_Click(object sender, EventArgs e)
+        {
+            if (grdTurnos.SelectedRows.Count > 0)
+            {
+            int fila = grdTurnos.SelectedRows[0].Index;
+            DataRow filaSeleccionada = turnosHoy.Rows[fila];
+            Detalles detalles = new Detalles(filaSeleccionada);
+            detalles.ShowDialog();
             }
         }
 
+        private void btnAgregarServicio_Click(object sender, EventArgs e)
+        {
+            NuevoServicio serv = new NuevoServicio();
+            serv.ShowDialog();
+            servicios = conn.Servicios();
+            gvServicios.DataSource = servicios;
+        }
+
+        private void btnEliminarServicio_Click(object sender, EventArgs e)
+        {
+            if (gvServicios.SelectedRows.Count > 0)
+            {
+                int fila = gvServicios.SelectedRows[0].Index;
+                int servicioId = Convert.ToInt32(gvServicios.Rows[fila].Cells["ServicioId"].Value);
+                string servicioNombre = gvServicios.Rows[fila].Cells["Servicio"].Value.ToString();
+                decimal precio = Convert.ToDecimal(gvServicios.Rows[fila].Cells["Precio"].Value);
+
+                // Mostrar un cuadro de diálogo de confirmación
+                string mensaje = $"¿Está seguro de que quiere eliminar el siguiente Servicio?\n\nServicio: {servicioNombre}\nPrecio: {precio:C}";
+                DialogResult resultado = MessageBox.Show(mensaje, "Confirmación de Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                        conn.EliminarServicio(servicioId);
+                        servicios = conn.Servicios();
+                        gvServicios.DataSource = servicios;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
     }
 }

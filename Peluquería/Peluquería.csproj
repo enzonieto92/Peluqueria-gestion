@@ -94,6 +94,12 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="Conexión.cs" />
+    <Compile Include="Detalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detalles.Designer.cs">
+      <DependentUpon>Detalles.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListaClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,12 @@
     <Compile Include="NuevoCliente.Designer.cs">
       <DependentUpon>NuevoCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="NuevoServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevoServicio.Designer.cs">
+      <DependentUpon>NuevoServicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="NuevoTurno.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +144,9 @@
     <Compile Include="VerTodo.Designer.cs">
       <DependentUpon>VerTodo.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Detalles.resx">
+      <DependentUpon>Detalles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NuevoCliente.resx">
       <DependentUpon>NuevoCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevoServicio.resx">
+      <DependentUpon>NuevoServicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NuevoTurno.resx">
       <DependentUpon>NuevoTurno.cs</DependentUpon>

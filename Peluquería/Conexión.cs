@@ -14,6 +14,7 @@ namespace Peluquería
         static string database = "PeluqueríaDB.mdf";
         private static string rutaConexion = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=" + path + @"\" + database + ";Integrated Security=True";
 
+
         public bool ComprobarDatos(string Usuario, string Contraseña)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
@@ -31,6 +32,23 @@ namespace Peluquería
             }
         }
 
+        public bool ConsultaCliente(string nombre, string apellido, string telefono)
+        {
+            using (SqlConnection conn = new SqlConnection(rutaConexion))
+            {
+                conn.Open();
+
+                string consulta = "SELECT COUNT(*) FROM Clientes WHERE Nombre=@Nombre AND Apellido=@Apellido AND Teléfono=@Telefono";
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", nombre);
+                    cmd.Parameters.AddWithValue("@Apellido", apellido);
+                    cmd.Parameters.AddWithValue("@Telefono", telefono);
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
 
         public void AgregarTurno(int ClienteId, string servicio, DateTime fecha)
         {
@@ -60,7 +78,8 @@ namespace Peluquería
                 }
             }
         }
-        public void AgregarTurno(string nombre, string apellido, string servicio, string telefono, DateTime fecha)
+
+        public void AgregarTurno(string nombre, string apellido, string Servicio, string telefono, DateTime fecha)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
             {
@@ -74,7 +93,7 @@ namespace Peluquería
 
                         cmd.Parameters.AddWithValue("@Nombre", nombre);
                         cmd.Parameters.AddWithValue("@Apellido", apellido);
-                        cmd.Parameters.AddWithValue("@Servicio", servicio);
+                        cmd.Parameters.AddWithValue("@Servicio", Servicio);
                         cmd.Parameters.AddWithValue("@Telefono", telefono);
                         cmd.Parameters.AddWithValue("@Fecha", fecha);
 
@@ -89,55 +108,32 @@ namespace Peluquería
                 }
             }
         }
-
-        public bool ConsultaCliente(string nombre, string apellido, string telefono)
+        public void AgregarServicio(string Servicio, string Precio)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
             {
-                conn.Open();
-
-                string consulta = "SELECT COUNT(*) FROM Clientes WHERE Nombre=@Nombre AND Apellido=@Apellido AND Teléfono=@Telefono";
-                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                try
                 {
-                    cmd.Parameters.AddWithValue("@Nombre", nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", apellido);
-                    cmd.Parameters.AddWithValue("@Telefono", telefono);
-                    int count = (int)cmd.ExecuteScalar();
-                    return count > 0;
-                }
-            }
-        }
-        public int ObtenerID(string nombre, string apellido)
-        {
-            using (SqlConnection conn = new SqlConnection(rutaConexion))
-            {
-                conn.Open();
+                    conn.Open();
 
-                string consulta = "SELECT ClienteId FROM Clientes WHERE Nombre=@Nombre AND Apellido=@Apellido";
-                using (SqlCommand cmd = new SqlCommand(consulta, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Nombre", nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", apellido);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand("AgregarServicio", conn)) // Reemplaza "NombreDelProcedimientoAlmacenado" con el nombre real del procedimiento almacenado
                     {
-                        if (reader.Read())
-                        {
-                            int id = reader.GetInt32(0);
-                            return id;
-                        }
-                        else
-                        {
-                            // Si no se encuentra el cliente, puedes devolver un valor predeterminado o lanzar una excepción.
-                            // En este ejemplo, devolvemos -1 si no se encuentra el cliente.
-                            return -1;
-                        }
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@Servicio", Servicio);
+                        cmd.Parameters.AddWithValue("@Precio", Precio);
+                        cmd.ExecuteNonQuery();
                     }
                 }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción según tus necesidades
+                    Console.WriteLine("Error al agregar Servicio: " + ex.Message);
+                    // También podrías lanzar una excepción personalizada si es necesario
+                }
             }
         }
-
-        public void EliminarTurno(int turnoId)
+        public void EliminarTurno(int TurnoId)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
             {
@@ -148,7 +144,7 @@ namespace Peluquería
                     string consulta = "DELETE FROM Turnos WHERE TurnoId = @TurnoId";
                     using (SqlCommand cmd = new SqlCommand(consulta, conn))
                     {
-                        cmd.Parameters.AddWithValue("@TurnoId", turnoId);
+                        cmd.Parameters.AddWithValue("@TurnoId", TurnoId);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -182,6 +178,85 @@ namespace Peluquería
                 }
             }
         }
+        public void EliminarServicio(int ServicioId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(rutaConexion))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("EliminarServicio", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agrega el parámetro "@ServicioId" al procedimiento almacenado
+                        cmd.Parameters.AddWithValue("@ServicioId", ServicioId);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción según tus necesidades
+                Console.WriteLine("Error al eliminar el servicio: " + ex.Message);
+                // También podrías lanzar una excepción personalizada si es necesario
+            }
+        }
+        public int ObtenerID(string nombre, string apellido)
+        {
+            using (SqlConnection conn = new SqlConnection(rutaConexion))
+            {
+                conn.Open();
+
+                string consulta = "SELECT ClienteId FROM Clientes WHERE Nombre=@Nombre AND Apellido=@Apellido";
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", nombre);
+                    cmd.Parameters.AddWithValue("@Apellido", apellido);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int id = reader.GetInt32(0);
+                            return id;
+                        }
+                        else
+                        {
+                            // Si no se encuentra el cliente, puedes devolver un valor predeterminado o lanzar una excepción.
+                            // En este ejemplo, devolvemos -1 si no se encuentra el cliente.
+                            return -1;
+                        }
+                    }
+                }
+            }
+        }
+
+        public string getNombre(string Usuario)
+        {
+            using (SqlConnection conn = new SqlConnection(rutaConexion))
+            {
+                conn.Open();
+
+                string consultaSQL = "SELECT Nombre_Apellido FROM Cuentas WHERE Usuario=@Usuario";
+                using (SqlCommand cmd = new SqlCommand(consultaSQL, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Usuario", Usuario);
+                    using (SqlDataReader filas = cmd.ExecuteReader())
+                    {
+                        if (filas.Read())
+                        {
+                            return filas["Nombre_Apellido"].ToString();
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public DataTable ObtenerClientes()
         {
             DataTable dtClientes = new DataTable();
@@ -238,8 +313,10 @@ namespace Peluquería
                             T.Servicio, 
                             CONVERT(varchar, T.Fecha, 103) AS Fecha,
                             LEFT(CONVERT(varchar, T.Fecha, 108), 5) + ' hs' AS Hora
+
                         FROM Turnos T
-                        INNER JOIN Clientes C ON T.ClienteId = C.ClienteId
+                            INNER JOIN Clientes C ON T.ClienteId = C.ClienteId
+                
                         WHERE T.Fecha >= @FechaInicio AND T.Fecha < @FechaFin";
 
                 using (SqlCommand cmd = new SqlCommand(consultaSQL, conn))
@@ -263,9 +340,6 @@ namespace Peluquería
 
             return turnosHoy;
         }
-
-
-
 
         public DataTable Turnos()
         {
@@ -329,29 +403,23 @@ namespace Peluquería
                 }
             }
         }
-
-
-        public string getNombre(string Usuario)
+        public DataTable Detalles()
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
             {
                 conn.Open();
 
-                string consultaSQL = "SELECT Nombre_Apellido FROM Cuentas WHERE Usuario=@Usuario";
+                string consultaSQL = "SELECT * FROM DetallesTurno";
                 using (SqlCommand cmd = new SqlCommand(consultaSQL, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Usuario", Usuario);
                     using (SqlDataReader filas = cmd.ExecuteReader())
                     {
-                        if (filas.Read())
-                        {
-                            return filas["Nombre_Apellido"].ToString();
-                        }
+                        DataTable dt = new DataTable();
+                        dt.Load(filas);
+                        return dt;
                     }
                 }
             }
-
-            return null;
         }
     } 
 }

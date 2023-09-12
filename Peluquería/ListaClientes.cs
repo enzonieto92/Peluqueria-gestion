@@ -30,7 +30,6 @@ namespace Peluquería
             animacion(true);
             gvClientes.DataSource = conn.ObtenerClientes();
             gvClientes.Columns["ClienteId"].Visible = false;
-            gvClientes.Columns["Balance"].Visible = false;
         }
 
 
