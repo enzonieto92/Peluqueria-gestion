@@ -111,6 +111,7 @@ namespace Peluquería
             this.txtbxPrecio.Size = new System.Drawing.Size(138, 16);
             this.txtbxPrecio.TabIndex = 80;
             this.txtbxPrecio.Enter += new System.EventHandler(this.txtbxPrecio_Enter);
+            this.txtbxPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxPrecio_KeyPress);
             this.txtbxPrecio.Leave += new System.EventHandler(this.txtbxPrecio_Leave);
             // 
             // lblServicio
@@ -174,9 +175,11 @@ namespace Peluquería
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NuevoServicio";
+            this.Opacity = 0D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.NuevoServicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

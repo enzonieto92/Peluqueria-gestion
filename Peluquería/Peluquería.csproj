@@ -100,6 +100,12 @@
     <Compile Include="Detalles.Designer.cs">
       <DependentUpon>Detalles.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormularioDinamico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormularioDinamico.Designer.cs">
+      <DependentUpon>FormularioDinamico.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListaClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </Compile>
     <EmbeddedResource Include="Detalles.resx">
       <DependentUpon>Detalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularioDinamico.resx">
+      <DependentUpon>FormularioDinamico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

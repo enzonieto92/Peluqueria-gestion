@@ -13,6 +13,7 @@ namespace Peluquería
 {
     public partial class MenuGestión : Form
     {
+        
         private Point dragStartPoint;
         private bool isDragging = false;
         static Conexión conn = new Conexión();
@@ -265,7 +266,7 @@ namespace Peluquería
                 if (result == DialogResult.Yes)
                 {
                     int clienteId = Convert.ToInt32(rowToDelete["ClienteId"]);
-                    conn.EliminarCliente(clienteId); 
+                    conn.EliminarCliente(clienteId);  
                     clientes.Rows.Remove(rowToDelete);
                     clientes = conn.ObtenerClientes();
                     gvClientes.DataSource = clientes;
@@ -321,6 +322,135 @@ namespace Peluquería
                     return;
                 }
             }
+        }
+
+        private void btnEditarServicio_Click(object sender, EventArgs e)
+        {
+            // Obtén la fila seleccionada del DataGridView (asumiendo que tienes un DataGridView llamado gvServicios)
+            DataGridViewRow filaSeleccionada = gvServicios.SelectedRows[0];
+
+            // Crea una instancia del formulario dinámico
+            FormularioDinamico formularioDinamico = new FormularioDinamico();
+
+            // Obtén el número de columnas en la fila seleccionada
+            int columnasCount = filaSeleccionada.Cells.Count - 1;
+
+            // Calcula el ancho disponible para cada TextBox
+            int anchoFormulario = formularioDinamico.Width ;
+            int anchoTextBox = (anchoFormulario/ columnasCount) - 30; // Resta el espacio entre TextBox
+
+            // Inicializa la posición horizontal
+            int posX = 25;
+
+            // Agrega TextBoxes con valores de la fila al formulario dinámico
+            foreach (DataGridViewCell celda in filaSeleccionada.Cells)
+            {
+                if (celda.ColumnIndex == 0){
+                    continue;
+                }
+                else
+                {
+
+                
+                TextBox textBox = new TextBox();
+                textBox.Text = celda.Value.ToString();
+                textBox.BorderStyle = BorderStyle.None;
+                textBox.BackColor = Color.DarkTurquoise;
+                textBox.Font = new Font("Calibri", 12f);
+                textBox.ForeColor = Color.White;
+                textBox.Width = anchoTextBox; // Establece el ancho igual para cada TextBox
+                textBox.Location = new Point(posX, 40); // Establece la posición de cada TextBox
+                textBox.Padding = new Padding(40);
+                textBox.Margin = new Padding(100);
+                formularioDinamico.Controls.Add(textBox);
+                }
+
+                posX += anchoTextBox + 10; // Incrementa la posición horizontal para el siguiente TextBox, incluyendo el espacio entre TextBox
+            }
+
+            // Obtiene la posición de la fila seleccionada en relación con el DataGridView
+            Point posicionEnDataGridView = gvServicios.GetCellDisplayRectangle(0, filaSeleccionada.Index, false).Location;
+
+            // Convierte la posición en el DataGridView a coordenadas de pantalla 
+            Point posicionEnPantalla = gvServicios.PointToScreen(posicionEnDataGridView);
+
+            // Establece la ubicación del formulario dinámico cerca de la fila seleccionada en el DataGridView
+            formularioDinamico.StartPosition = FormStartPosition.Manual;
+            formularioDinamico.Location = new Point(
+                posicionEnPantalla.X - 45, // Añade un pequeño desplazamiento a la izquierda para evitar la superposición del borde
+                posicionEnPantalla.Y + filaSeleccionada.Height + 5 // 5 es el espacio entre el DataGridView y el formulario
+            );
+
+            // Establece el tamaño del formulario dinámico
+            formularioDinamico.Width = anchoFormulario ;
+
+            // Muestra el formulario dinámico
+            formularioDinamico.ShowDialog();
+        }
+
+        private void btnEditarCliente_Click(object sender, EventArgs e)
+        {
+            // Obtén la fila seleccionada del DataGridView (asumiendo que tienes un DataGridView llamado gvServicios)
+            DataGridViewRow filaSeleccionada = gvClientes.SelectedRows[0];
+
+            // Crea una instancia del formulario dinámico
+            FormularioDinamico formularioDinamico = new FormularioDinamico();
+
+            // Obtén el número de columnas en la fila seleccionada
+            int columnasCount = filaSeleccionada.Cells.Count - 1;
+
+            // Calcula el ancho disponible para cada TextBox
+            int anchoFormulario = formularioDinamico.Width;
+            int anchoTextBox = (anchoFormulario / columnasCount) - 30; // Resta el espacio entre TextBox
+
+            // Inicializa la posición horizontal
+            int posX = 30;
+
+            // Agrega TextBoxes con valores de la fila al formulario dinámico
+            foreach (DataGridViewCell celda in filaSeleccionada.Cells)
+            {
+                if (celda.ColumnIndex == 0)
+                {
+                    continue;
+                }
+                else
+                {
+
+
+                    TextBox textBox = new TextBox();
+                    textBox.Text = celda.Value.ToString();
+                    textBox.BorderStyle = BorderStyle.None;
+                    textBox.BackColor = Color.DarkTurquoise;
+                    textBox.Font = new Font("Calibri", 12f);
+                    textBox.ForeColor = Color.White;
+                    textBox.Width = anchoTextBox; // Establece el ancho igual para cada TextBox
+                    textBox.Location = new Point(posX, 40); // Establece la posición de cada TextBox
+                    textBox.Padding = new Padding(40);
+                    textBox.Margin = new Padding(100);
+                    formularioDinamico.Controls.Add(textBox);
+                }
+
+                posX += anchoTextBox + 10; // Incrementa la posición horizontal para el siguiente TextBox, incluyendo el espacio entre TextBox
+            }
+
+            // Obtiene la posición de la fila seleccionada en relación con el DataGridView
+            Point posicionEnDataGridView = gvClientes.GetCellDisplayRectangle(0, filaSeleccionada.Index, false).Location;
+
+            // Convierte la posición en el DataGridView a coordenadas de pantalla 
+            Point posicionEnPantalla = gvClientes.PointToScreen(posicionEnDataGridView);
+
+            // Establece la ubicación del formulario dinámico cerca de la fila seleccionada en el DataGridView
+            formularioDinamico.StartPosition = FormStartPosition.Manual;
+            formularioDinamico.Location = new Point(
+                posicionEnPantalla.X + 22, // Añade un pequeño desplazamiento a la izquierda para evitar la superposición del borde
+                posicionEnPantalla.Y + filaSeleccionada.Height  // 5 es el espacio entre el DataGridView y el formulario
+            );
+
+            // Establece el tamaño del formulario dinámico
+            formularioDinamico.Width = anchoFormulario;
+
+            // Muestra el formulario dinámico
+            formularioDinamico.ShowDialog();
         }
     }
 }

@@ -18,9 +18,14 @@ namespace Peluquería
             InitializeComponent();
         }
         static Conexión conn = new Conexión();
+        private void NuevoServicio_Load(object sender, EventArgs e)
+        {
+            animacion(true);
+        }
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            animacion(false);
         }
 
         private void txtbxServicio_Enter(object sender, EventArgs e)
@@ -63,6 +68,35 @@ namespace Peluquería
                 {
                     return;
                 }
+        }
+
+
+        private void txtbxPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, cancela la entrada de texto
+                e.Handled = true;
+            }
+        }
+
+
+        public void animacion(bool aparece)
+        {
+            if (aparece)
+            {
+                Transition.run(this, "Opacity", 1.0, new TransitionType_Linear(300));
+            }
+            else
+            {
+                Transition transition = new Transition(new TransitionType_Linear(300));
+                transition.TransitionCompletedEvent += (s, args) =>
+                {
+                    this.Close();
+                };
+                transition.add(this, "Opacity", 0.0);
+                transition.run();
+            }
         }
     }
 }
