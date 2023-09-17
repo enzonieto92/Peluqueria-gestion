@@ -388,7 +388,6 @@ namespace Peluquería
             this.Name = "NuevoTurno";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.NuevoTurno_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Transitions;
 
@@ -32,7 +26,7 @@ namespace Peluquería
                 MenuGestión Menu = new MenuGestión(Nombre);
                 Menu.ShowDialog();
                 this.Show();
-                
+
             }
             else
             {
@@ -71,10 +65,10 @@ namespace Peluquería
 
         private void LinkInvitado_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-                animacion(false);
-                MenuGestión Menu = new MenuGestión("INVITADO");
-                Menu.ShowDialog();
-                animacion(true);
+            animacion(false);
+            MenuGestión Menu = new MenuGestión("INVITADO");
+            Menu.ShowDialog();
+            animacion(true);
         }
 
         private void txtboxUsuario_Enter(object sender, EventArgs e)

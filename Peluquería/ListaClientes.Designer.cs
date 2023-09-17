@@ -185,7 +185,6 @@ namespace Peluquería
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.ListaClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvClientes)).EndInit();
             this.ResumeLayout(false);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
@@ -78,7 +74,6 @@ namespace Peluquería
                 }
             }
         }
-
         public void AgregarTurno(string nombre, string apellido, string Servicio, string telefono, DateTime fecha)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
@@ -133,6 +128,32 @@ namespace Peluquería
                 }
             }
         }
+        public void AgregarCliente(string nombre, string apellido, string teléfono)
+        {
+            using (SqlConnection conn = new SqlConnection(rutaConexion))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string consultaAgregar = "INSERT INTO Clientes (Nombre, Apellido, Teléfono) VALUES (@nombre, @apellido, @teléfono)";
+                    using (SqlCommand cmd = new SqlCommand(consultaAgregar, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@apellido", apellido);
+                        cmd.Parameters.AddWithValue("@teléfono", teléfono);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción según tus necesidades
+                    Console.WriteLine("Error al agregar turno: " + ex.Message);
+                    // También podrías lanzar una excepción personalizada si es necesario
+                }
+            }
+        }
         public void EliminarTurno(int TurnoId)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
@@ -155,7 +176,6 @@ namespace Peluquería
                 }
             }
         }
-
         public void EliminarCliente(int ClienteId)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
@@ -204,6 +224,33 @@ namespace Peluquería
                 // También podrías lanzar una excepción personalizada si es necesario
             }
         }
+        public void EditarCliente(int ClienteId, string Nombre, string Apellido, string Teléfono)
+        {
+            using (SqlConnection conn = new SqlConnection(rutaConexion))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string consulta = "UPDATE Clientes SET Nombre = @NuevoNombre, Apellido = @NuevoApellido, Teléfono = @NuevoTelefono WHERE ClienteId = @ClienteId";
+
+                    using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ClienteId", ClienteId);
+                        cmd.Parameters.AddWithValue("@NuevoNombre", Nombre);
+                        cmd.Parameters.AddWithValue("@NuevoApellido", Apellido);
+                        cmd.Parameters.AddWithValue("@NuevoTelefono", Teléfono);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción según tus necesidades
+                    Console.WriteLine("Error al editar Cliente: " + ex.Message);
+                }
+            }
+        }
         public int ObtenerID(string nombre, string apellido)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
@@ -233,7 +280,6 @@ namespace Peluquería
                 }
             }
         }
-
         public string getNombre(string Usuario)
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
@@ -256,6 +302,7 @@ namespace Peluquería
 
             return null;
         }
+
 
         public DataTable ObtenerClientes()
         {
@@ -294,7 +341,6 @@ namespace Peluquería
 
             return dtClientes;
         }
-
         public DataTable TurnosHoy()
         {
             DateTime fechaActual = DateTime.Today;
@@ -340,7 +386,6 @@ namespace Peluquería
 
             return turnosHoy;
         }
-
         public DataTable Turnos()
         {
             DateTime fechaActual = DateTime.Today;
@@ -384,7 +429,6 @@ namespace Peluquería
 
             return turnosHoy;
         }
-
         public DataTable Servicios()
         {
             using (SqlConnection conn = new SqlConnection(rutaConexion))
@@ -421,5 +465,5 @@ namespace Peluquería
                 }
             }
         }
-    } 
+    }
 }

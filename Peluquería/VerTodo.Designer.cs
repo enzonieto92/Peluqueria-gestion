@@ -201,6 +201,8 @@ namespace Peluquería
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VerTodo";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.VerTodo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdTurnos)).EndInit();

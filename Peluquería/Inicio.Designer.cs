@@ -222,7 +222,6 @@ namespace Peluquería
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Peluquería Erica Martinez";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.PanelSesión.ResumeLayout(false);
             this.PanelSesión.PerformLayout();

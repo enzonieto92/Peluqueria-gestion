@@ -29,19 +29,25 @@ namespace Peluquería
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NuevoCliente));
             this.Borde3 = new System.Windows.Forms.Panel();
             this.Borde2 = new System.Windows.Forms.Panel();
             this.Borde = new System.Windows.Forms.Panel();
             this.txtbxNombre = new System.Windows.Forms.TextBox();
             this.txtbxTelefono = new System.Windows.Forms.TextBox();
             this.txtbxApellido = new System.Windows.Forms.TextBox();
-            this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnAgregarTurno = new System.Windows.Forms.Button();
+            this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlDrag = new System.Windows.Forms.Panel();
+            this.epNombre = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.epApellido = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epNombre)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epApellido)).BeginInit();
             this.SuspendLayout();
             // 
             // Borde3
@@ -78,8 +84,7 @@ namespace Peluquería
             this.txtbxNombre.Name = "txtbxNombre";
             this.txtbxNombre.Size = new System.Drawing.Size(158, 16);
             this.txtbxNombre.TabIndex = 91;
-            this.txtbxNombre.Enter += new System.EventHandler(this.txtbxNombre_Enter);
-            this.txtbxNombre.Leave += new System.EventHandler(this.txtbxNombre_Leave);
+            this.txtbxNombre.Validating += new System.ComponentModel.CancelEventHandler(this.txtbxNombre_Validating);
             // 
             // txtbxTelefono
             // 
@@ -91,8 +96,6 @@ namespace Peluquería
             this.txtbxTelefono.Name = "txtbxTelefono";
             this.txtbxTelefono.Size = new System.Drawing.Size(158, 16);
             this.txtbxTelefono.TabIndex = 94;
-            this.txtbxTelefono.Enter += new System.EventHandler(this.txtbxTelefono_Enter);
-            this.txtbxTelefono.Leave += new System.EventHandler(this.txtbxTelefono_Leave);
             // 
             // txtbxApellido
             // 
@@ -104,40 +107,26 @@ namespace Peluquería
             this.txtbxApellido.Name = "txtbxApellido";
             this.txtbxApellido.Size = new System.Drawing.Size(158, 16);
             this.txtbxApellido.TabIndex = 92;
-            this.txtbxApellido.Enter += new System.EventHandler(this.txtbxApellido_Enter);
-            this.txtbxApellido.Leave += new System.EventHandler(this.txtbxApellido_Leave);
+            this.txtbxApellido.Validating += new System.ComponentModel.CancelEventHandler(this.txtbxApellido_Validating);
             // 
-            // btnCerrar
+            // btnAgregarCliente
             // 
-            this.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCerrar.FlatAppearance.BorderSize = 0;
-            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
-            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrar.Image = global::Peluquería.Properties.Resources.icons8_cerrar_ventana_48;
-            this.btnCerrar.Location = new System.Drawing.Point(288, 0);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(40, 30);
-            this.btnCerrar.TabIndex = 90;
-            this.btnCerrar.UseVisualStyleBackColor = true;
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
-            // 
-            // btnAgregarTurno
-            // 
-            this.btnAgregarTurno.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnAgregarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAgregarTurno.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.btnAgregarTurno.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnAgregarTurno.FlatAppearance.BorderSize = 0;
-            this.btnAgregarTurno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarTurno.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarTurno.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAgregarTurno.Location = new System.Drawing.Point(57, 302);
-            this.btnAgregarTurno.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAgregarTurno.Name = "btnAgregarTurno";
-            this.btnAgregarTurno.Size = new System.Drawing.Size(209, 47);
-            this.btnAgregarTurno.TabIndex = 89;
-            this.btnAgregarTurno.Text = "AGREGAR CLIENTE";
-            this.btnAgregarTurno.UseVisualStyleBackColor = false;
+            this.btnAgregarCliente.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAgregarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAgregarCliente.FlatAppearance.BorderSize = 0;
+            this.btnAgregarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarCliente.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarCliente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnAgregarCliente.Location = new System.Drawing.Point(57, 302);
+            this.btnAgregarCliente.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAgregarCliente.Name = "btnAgregarCliente";
+            this.btnAgregarCliente.Size = new System.Drawing.Size(209, 47);
+            this.btnAgregarCliente.TabIndex = 89;
+            this.btnAgregarCliente.Text = "AGREGAR CLIENTE";
+            this.btnAgregarCliente.UseVisualStyleBackColor = false;
+            this.btnAgregarCliente.Click += new System.EventHandler(this.btnAgregarCliente_Click);
             // 
             // lblTelefono
             // 
@@ -175,6 +164,7 @@ namespace Peluquería
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
+            this.lblTitulo.CausesValidation = false;
             this.lblTitulo.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.lblTitulo.Location = new System.Drawing.Point(74, 38);
@@ -187,10 +177,40 @@ namespace Peluquería
             // 
             this.pnlDrag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlDrag.CausesValidation = false;
             this.pnlDrag.Location = new System.Drawing.Point(2, 0);
             this.pnlDrag.Name = "pnlDrag";
             this.pnlDrag.Size = new System.Drawing.Size(325, 113);
             this.pnlDrag.TabIndex = 104;
+            // 
+            // epNombre
+            // 
+            this.epNombre.BlinkRate = 0;
+            this.epNombre.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.epNombre.ContainerControl = this;
+            this.epNombre.Icon = ((System.Drawing.Icon)(resources.GetObject("epNombre.Icon")));
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCerrar.CausesValidation = false;
+            this.btnCerrar.FlatAppearance.BorderSize = 0;
+            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
+            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrar.Image = global::Peluquería.Properties.Resources.icons8_cerrar_ventana_48;
+            this.btnCerrar.Location = new System.Drawing.Point(288, 0);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(40, 30);
+            this.btnCerrar.TabIndex = 90;
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
+            // epApellido
+            // 
+            this.epApellido.BlinkRate = 0;
+            this.epApellido.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.epApellido.ContainerControl = this;
+            this.epApellido.Icon = ((System.Drawing.Icon)(resources.GetObject("epApellido.Icon")));
             // 
             // NuevoCliente
             // 
@@ -206,7 +226,7 @@ namespace Peluquería
             this.Controls.Add(this.txtbxTelefono);
             this.Controls.Add(this.txtbxApellido);
             this.Controls.Add(this.btnCerrar);
-            this.Controls.Add(this.btnAgregarTurno);
+            this.Controls.Add(this.btnAgregarCliente);
             this.Controls.Add(this.lblTelefono);
             this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.lblNombre);
@@ -220,6 +240,8 @@ namespace Peluquería
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.NuevoCliente_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.epNombre)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epApellido)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,11 +256,13 @@ namespace Peluquería
         private System.Windows.Forms.TextBox txtbxTelefono;
         private System.Windows.Forms.TextBox txtbxApellido;
         private System.Windows.Forms.Button btnCerrar;
-        private System.Windows.Forms.Button btnAgregarTurno;
+        private System.Windows.Forms.Button btnAgregarCliente;
         private System.Windows.Forms.Label lblTelefono;
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel pnlDrag;
+        private System.Windows.Forms.ErrorProvider epNombre;
+        private System.Windows.Forms.ErrorProvider epApellido;
     }
 }

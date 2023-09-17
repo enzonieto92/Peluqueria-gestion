@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Transitions;
 
@@ -53,12 +48,12 @@ namespace Peluquería
         {
             dtpFecha.Value = DateTime.Today;
             cbxHora.SelectedItem = "10";
-            cbxMinuto.SelectedItem = "00" ;
+            cbxMinuto.SelectedItem = "00";
         }
 
         private void btnAgregarTurno_Click(object sender, EventArgs e)
         {
-            int ClienteId = 0;
+            int ClienteId;
             string nombre = txtbxNombre.Text;
             string apellido = txtbxApellido.Text;
             string servicio = cbxServicios.SelectedItem.ToString();
@@ -70,12 +65,12 @@ namespace Peluquería
             TimeSpan hs = TimeSpan.Parse(horaSeleccionada);
 
             DateTime fechaSeleccionada = dtpFecha.Value.Date;
-            string fecha = fechaSeleccionada.Day + "/" +  fechaSeleccionada.Month + "/" + fechaSeleccionada.Year;
+            string fecha = fechaSeleccionada.Day + "/" + fechaSeleccionada.Month + "/" + fechaSeleccionada.Year;
             DateTime fechaYHora = fechaSeleccionada.Add(hs);
 
             string message = "Se va a agregar el siguiente Turno: \n\n" +
                              "Nombre: " + nombre + " " + apellido + "\n\n" +
-                             "Fecha:  " + fecha + "\n\n" + 
+                             "Fecha:  " + fecha + "\n\n" +
                              "Horario: " + hora + ":" + minuto + " hs \n\n" +
                              "Servicio: " + servicio;
 
@@ -101,16 +96,16 @@ namespace Peluquería
             else
             {
                 DialogResult result = MessageBox.Show(message, title, buttons);
-                    if (result == DialogResult.Yes)
-                    {
-                        conn.AgregarTurno(nombre, apellido, servicio, teléfono, fechaYHora);
-                        SeAgregoTurno = true;
-                        this.Close();
-                    }
-                    else
-                    {
-                        return;
-                    }
+                if (result == DialogResult.Yes)
+                {
+                    conn.AgregarTurno(nombre, apellido, servicio, teléfono, fechaYHora);
+                    SeAgregoTurno = true;
+                    this.Close();
+                }
+                else
+                {
+                    return;
+                }
             }
         }
         public void animacion(bool aparece)
